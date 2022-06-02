@@ -1,0 +1,219 @@
+{
+  "ModelName": "Survey",
+  "ModelMetadata": {
+    "Author": "Luan Figueredo",
+    "DateCreated": "May 12, 2022, 10:05 AM",
+    "DateLastModified": "May 24, 2022, 08:14 PM",
+    "Description": "",
+    "AWSService": "Amazon DynamoDB",
+    "Version": "3.0"
+  },
+  "DataModel": [
+    {
+      "TableName": "surveys",
+      "KeyAttributes": {
+        "PartitionKey": {
+          "AttributeName": "PK",
+          "AttributeType": "S"
+        },
+        "SortKey": {
+          "AttributeName": "SK",
+          "AttributeType": "S"
+        }
+      },
+      "NonKeyAttributes": [
+        {
+          "AttributeName": "EntityType",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "InitialDate",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "FinalDate",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "Target",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "Fields",
+          "AttributeType": "M"
+        },
+        {
+          "AttributeName": "Values",
+          "AttributeType": "M"
+        },
+        {
+          "AttributeName": "ResponseDate",
+          "AttributeType": "S"
+        }
+      ],
+      "GlobalSecondaryIndexes": [
+        {
+          "IndexName": "SurveyType",
+          "KeyAttributes": {
+            "PartitionKey": {
+              "AttributeName": "EntityType",
+              "AttributeType": "S"
+            },
+            "SortKey": {
+              "AttributeName": "SK",
+              "AttributeType": "S"
+            }
+          },
+          "Projection": {
+            "ProjectionType": "ALL"
+          }
+        },
+        {
+          "IndexName": "SurveyTarget",
+          "KeyAttributes": {
+            "PartitionKey": {
+              "AttributeName": "Target",
+              "AttributeType": "S"
+            },
+            "SortKey": {
+              "AttributeName": "FinalDate",
+              "AttributeType": "S"
+            }
+          },
+          "Projection": {
+            "ProjectionType": "ALL"
+          }
+        }
+      ],
+      "TableData": [
+        {
+          "PK": {
+            "S": "survey#1"
+          },
+          "SK": {
+            "S": "survey#1"
+          },
+          "EntityType": {
+            "S": "Survey"
+          },
+          "InitialDate": {
+            "S": "2022-01-01"
+          },
+          "FinalDate": {
+            "S": "2022-02-01"
+          },
+          "Target": {
+            "S": "APP_1"
+          },
+          "Fields": {
+            "M": []
+          }
+        },
+        {
+          "PK": {
+            "S": "survey#2"
+          },
+          "SK": {
+            "S": "survey#2"
+          },
+          "EntityType": {
+            "S": "Survey"
+          },
+          "InitialDate": {
+            "S": "2022-01-01"
+          },
+          "FinalDate": {
+            "S": "2022-02-01"
+          },
+          "Target": {
+            "S": "APP_2"
+          },
+          "Fields": {
+            "M": []
+          }
+        },
+        {
+          "PK": {
+            "S": "survey#1"
+          },
+          "SK": {
+            "S": "user#1"
+          },
+          "EntityType": {
+            "S": "Response"
+          },
+          "Values": {
+            "M": []
+          },
+          "ResponseDate": {
+            "S": "2022-01-10"
+          }
+        },
+        {
+          "PK": {
+            "S": "survey#1"
+          },
+          "SK": {
+            "S": "user#2"
+          },
+          "EntityType": {
+            "S": "Response"
+          },
+          "Values": {
+            "M": []
+          },
+          "ResponseDate": {
+            "S": "2022-01-11"
+          }
+        },
+        {
+          "PK": {
+            "S": "survey#2"
+          },
+          "SK": {
+            "S": "user#1"
+          },
+          "EntityType": {
+            "S": "Response"
+          },
+          "Values": {
+            "M": []
+          },
+          "ResponseDate": {
+            "S": "2022-01-11"
+          }
+        }
+      ],
+      "DataAccess": {
+        "MySql": {}
+      },
+      "BillingMode": "PROVISIONED",
+      "ProvisionedCapacitySettings": {
+        "ProvisionedThroughput": {
+          "ReadCapacityUnits": 5,
+          "WriteCapacityUnits": 5
+        },
+        "AutoScalingRead": {
+          "ScalableTargetRequest": {
+            "MinCapacity": 1,
+            "MaxCapacity": 10,
+            "ServiceRole": "AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+          },
+          "ScalingPolicyConfiguration": {
+            "TargetValue": 70
+          }
+        },
+        "AutoScalingWrite": {
+          "ScalableTargetRequest": {
+            "MinCapacity": 1,
+            "MaxCapacity": 10,
+            "ServiceRole": "AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+          },
+          "ScalingPolicyConfiguration": {
+            "TargetValue": 70
+          }
+        }
+      }
+    }
+  ]
+}
